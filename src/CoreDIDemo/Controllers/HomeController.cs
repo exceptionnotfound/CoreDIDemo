@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CoreDIDemo.Interfaces;
+using CoreDIDemo.ViewModels;
 
 namespace CoreDIDemo.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IInstanceUsersRepository _userRepo;
+        public HomeController(IInstanceUsersRepository userRepo)
         {
-            return View();
+            _userRepo = userRepo;
         }
 
-        public IActionResult About()
+        public IActionResult Instance()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            InstanceUsersVM model = new InstanceUsersVM();
+            model.Users = _userRepo.GetAll();
+            model.RandomNumber = _userRepo.GetCurrentRandomValue();
+            return View(model);
         }
 
         public IActionResult Error()
