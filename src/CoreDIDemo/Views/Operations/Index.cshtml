@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "ASP.NET Core Dependency Injection Demo";
+}
+
+<h2>Lifetimes</h2>
+
+<span>Controller Operations</span>
+<ul>
+    <li><strong>Transient:</strong> @ViewBag.Transient.GetCurrentID()</li>
+    <li><strong>Scoped:</strong> @ViewBag.Scoped.GetCurrentID()</li>
+    <li><strong>Singleton:</strong> @ViewBag.Singleton.GetCurrentID()</li>
+    <li><strong>Singleton Instance:</strong> @ViewBag.SingletonInstance.GetCurrentID()</li>
+</ul>
+<span>OperationService Operations</span>
+<ul>
+    <li><strong>Transient:</strong> @ViewBag.Service.TransientOperation.GetCurrentID()</li>
+    <li><strong>Scoped:</strong> @ViewBag.Service.ScopedOperation.GetCurrentID()</li>
+    <li><strong>Singleton:</strong> @ViewBag.Service.SingletonOperation.GetCurrentID()</li>
+    <li><strong>Singleton Instance:</strong> @ViewBag.Service.SingletonInstanceOperation.GetCurrentID()</li>
+</ul>

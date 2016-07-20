@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CoreDIDemo.Repositories;
 using CoreDIDemo.Interfaces;
+using CoreDIDemo.Operations;
+using CoreDIDemo.Services;
 
 namespace CoreDIDemo
 {
@@ -32,7 +33,11 @@ namespace CoreDIDemo
             // Add framework services.
             services.AddMvc();
 
-            services.AddTransient<IInstanceUsersRepository, InstanceUsersRepository>();
+            services.AddTransient<IOperationTransient, Operation>();
+            services.AddScoped<IOperationScoped, Operation>();
+            services.AddSingleton<IOperationSingleton, Operation>();
+            services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
+            services.AddTransient<OperationService, OperationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
